@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imooc.miaosha.domain.User;
+import com.imooc.miaosha.redis.KeyPrefix;
 import com.imooc.miaosha.redis.RedisService;
+import com.imooc.miaosha.redis.UserKey;
 import com.imooc.miaosha.result.CodeMsg;
 import com.imooc.miaosha.result.Result;
 import com.imooc.miaosha.service.UserService;
@@ -67,12 +69,23 @@ public class sampleController {
 	        return Result.success(true);
 	    }
 	 	
-	 	//执行redis提供的服务接口
+	 	//执行redis提供的服务接口 ( 在redis中通过key来获取指定的对象 )
 	 	@RequestMapping("/redis/get")
 	    @ResponseBody
-	    public Result<Boolean> redisGet() {
-	 		redisService.get(String,Class<T> clazz); 
-	        return Result.success(true);
+	    public Result<User> redisGet() {
+	 		User v1 = redisService.get(UserKey.getById,"1",User.class); // UserKey:id1
+	        return Result.success(v1);
+	    }
+	 	
+	 	//执行redis提供的服务接口 ( 在redis中添加一个对象 )
+	 	@RequestMapping("/redis/set")
+	    @ResponseBody
+	    public Result<Boolean> redisSet() {
+	 		User user = new User();
+	 		user.setId(1);
+	 		user.setName("张山");
+	 		boolean v2 = redisService.set(UserKey.getById,"1",user); 
+	        return Result.success(v2);
 	    }
 	 	
 }
