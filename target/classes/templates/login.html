@@ -61,12 +61,12 @@
 function login(){
 	$("#loginForm").validate({
         submitHandler:function(form){
-             doLogin(); //表单提交以后进行验证
+             doLogin(); 	//表单提交以后进行验证
         }    
     });
 }
 function doLogin(){
-	g_showLoading(); 	//显示登陆中
+	g_showLoading(); 		//显示登陆中
 	
 	var inputPass = $("#password").val(); //获取用户输入的密码
 	var salt = g_passsword_salt;   //g_passsword_salt在common文件中标出,与服务端相同
@@ -77,7 +77,7 @@ function doLogin(){
 		url: "/login/do_login",
 	    type: "POST",
 	    data:{
-	    	mobile:$("#mobile").val(), //获取到手机号和密码这两项
+	    	mobile:$("#mobile").val(), //获取到手机号和密码这两项传递给后端进行验证
 	    	password: password
 	    },
 	    success:function(data){

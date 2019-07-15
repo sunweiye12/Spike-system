@@ -47,8 +47,9 @@ public class sampleController {
 	 		//return new Result(500100, "XXX");
 	    }
 	 	
+	 	//此处是将信息传递给网页
 	 	@RequestMapping("/thymeleaf")
-	    public String  thymeleaf(Model model) {
+	    public String thymeleaf(Model model) {  
 	 		model.addAttribute("name", "Joshua");
 	 		return "hello";
 	    }

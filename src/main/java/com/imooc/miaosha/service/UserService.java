@@ -19,7 +19,7 @@ public class UserService {
 	}
 
 	//测试事务,出错回滚 --> (添加此标签以后如果出错会回滚)
-//	@Transactional
+	@Transactional
 	public boolean tx() {
 		User u1= new User();
 		u1.setId(2);
